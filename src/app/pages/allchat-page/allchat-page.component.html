@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+
+<div class="all-chat-page">
+    <hr>
+    <div *ngIf="menteeChats.length; else nochatwithmentors">
+        <img class="title-sec" src="/assets/mentor.png">
+        <h3> Chat with Matched Mentors: </h3>
+        <ul>
+            <li *ngFor="let match of menteeChats">
+                <div  *ngIf="(match.mentor | firedoc:'users' | async) as m;">
+                        <a [routerLink]="['/chat', match.id]"> 
+                        <img class='quick-profile' *ngIf="m.avatar else blankPic" [src]="m.id | avatar | async" />
+                        <ng-template #blankPic>
+                            <img class='quick-profile' src="/assets/blank_profile.jpg"/>
+                        </ng-template>
+                        {{ m.name }}
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    
+    <div *ngIf="mentorChats.length; else nochatwithmentees"> 
+        <img class="title-sec" src="/assets/mentee.png">
+        <h3> Chat with Matched Mentees: </h3>
+        <ul>
+            <li *ngFor="let match of mentorChats">
+                <div  *ngIf="(match.mentee | firedoc:'users' | async) as m;">
+                    <a [routerLink]="['/chat', match.id]"> 
+                        <img class='quick-profile' *ngIf="m.avatar else blankPic" [src]="m.id | avatar | async" />
+                        <ng-template #blankPic>
+                            <img class='quick-profile' src="/assets/blank_profile.jpg"/>
+                        </ng-template>
+                        {{ m.name }}
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr>
+
+    <ng-template #nochatwithmentors>
+        <h3> There are 0 matched mentors </h3>
+    </ng-template>
+
+    <ng-template #nochatwithmentees>
+        <h3> There are 0 matched mentees </h3>
+    </ng-template>
+</div>

@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="page">
+    <div class="intro">
+        <h1>Hello {{ (user$ | async)?.name }}!</h1>
+        <p>Complete your profile!</p>
+    </div>
+    
+    <div class="action-cards">
+        <mat-card class="clickable" routerLink="/mentor">
+            <img src="/assets/mentor.png">
+            <span class="action-text">Mentor Profile</span>
+        </mat-card>
+        <mat-card class="clickable" routerLink="/mentee">
+            <img src="/assets/mentee.png">
+            <span class="action-text">Mentee Profile</span>
+        </mat-card>
+        <mat-card class="clickable" routerLink="/allchat">
+            <img class="chat" src="/assets/chat.png">
+            <span class="action-text">Chats</span>
+        </mat-card>
+    </div>
+</div>

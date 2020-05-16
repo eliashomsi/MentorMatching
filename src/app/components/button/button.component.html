@@ -1,0 +1,4 @@
+<button (click)="action.emit()" mat-flat-button [color]="color" [disabled]="disabled || loading">
+    <span [class.hide]="loading"><ng-content></ng-content></span>
+    <mat-spinner [class.hide]="!loading" color="accent" diameter="24"></mat-spinner>
+</button>

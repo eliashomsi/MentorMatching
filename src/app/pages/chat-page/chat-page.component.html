@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+
+<div class="chat-page">
+    <div class="other-chats">
+
+    </div>
+    <div class="chat-content">
+        <div #scrollMe id="thisChatHistory" class="chat-history">
+            <div *ngFor="let chat of chats$ | async">
+                <div class="speech-wrapper">
+                    <div class="bubble" [class.alt]="chat.user == userId">
+                        <div class="txt">
+                            <p class="name" [class.alt]="chat.user == userId">{{ (chat.user | firedoc:'users' | async)?.name }}</p>
+                            <p class="message">{{ chat.content }}</p>
+                        </div>
+                    <div class="bubble-arrow" [class.alt]="chat.user == userId"></div>
+                        <div class="speech-divider"></div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </div>
+        
+        <form class="chat-box">
+            <input
+                [formControl]="chatForm"
+                placeholder="Hello..."
+                matInput
+            >
+            <button (click)="sendText()" type="submit" mat-flat-button>
+                Send
+            </button>
+        </form>
+    </div>
+    <div class="profile hide-on-mobile">
+        <ng-container *ngIf="match$ | async as match">
+            <ng-container *ngIf="(match.mentor === userId ? match.mentee : match.mentor) | firedoc:'users' | async as user">
+                <div class="profile-image-cropper">
+                    <img class="hide-on-mobile" *ngIf="user.avatar else blankPic" [src]="user.id | avatar | async" class="profile-image">
+                    <ng-template #blankPic>
+                        <img class="hide-on-mobile" src="/assets/blank_profile.jpg" class="card-cover"/>
+                    </ng-template>
+                </div>
+                <p>{{ user.name }}</p>
+                <p class ="profile-section"><a href="mailto:{{user.email}}" >{{user.email}} </a></p>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

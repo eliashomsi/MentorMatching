@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Upload Resume</h4>
+        <button type="button" 
+                class="close pull-right" 
+                (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+        <mat-card class="mat-elevation-z3">
+            <div floatLabel="always" appearance="outline">
+                <mat-label>New Resume Upload</mat-label>
+                <input
+                    type="file"
+                    accept=".pdf"
+                    (change)="uploadFile($event)"
+                >
+            </div>
+        </mat-card>
+    </div>
+</ng-template>
+
+<div class="page">
+    <div class="intro">
+        <h1>Hello {{ (user$ | async)?.name }}!</h1>
+        <p>Mentee Profile</p>
+    </div>
+    
+    <mat-card class="mat-elevation-z3">
+        <h4> step 1  <span *ngIf="(mentee$ | async)?.id" style="color:green;"> &#10004; </span> </h4>
+        <form [formGroup]="menteeForm">
+            <mat-form-field floatLabel="always" class="full-width">
+                <mat-label>What is your major?</mat-label>
+                <input
+                    id="major"
+                    name="major" 
+                    type="string"
+                    [value]="(mentee$ | async)?.major"
+                    matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-chip-list #chipList aria-label="Company selection">
+                    <mat-chip *ngFor="let company of companies" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(company)">
+                    {{company}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Which companies are you interrested in?"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </form>
+        <div class="form-actions">
+            <div class="flex-span"></div>
+            <button (click)="completeProfile()">Submit</button>
+            <button routerLink="/user">Go Back</button>
+        </div>
+    </mat-card>
+
+    <br/>
+    <mat-card class="mat-elevation-z3">
+        <h4> step 2 <span *ngIf="(mentee$ | async)?.resume" style="color:green;"> &#10004; </span> </h4>
+        <div class="full-width">
+            <div *ngIf="(mentee$ | async)?.resume; else uploadResume">
+                <p> You have uploaded <a  target="_blank" [href]="userId | resume| async" > resume.pdf </a> to change it click <span (click)="openModal(template)" class="clickable"> here </span> </p>
+            </div>
+
+            <ng-template #uploadResume>
+                <div>
+                    Please add your resume <span (click)="openModal(template)" class="clickable"> here </span>     
+                </div>
+            </ng-template>
+        </div>
+    </mat-card>
+
+    <br/>
+    <br/>
+    <mat-card class="mat-elevation-z3">
+        <h4> Matched Mentors:</h4>
+        <br/>
+        <div>
+            <div class="match-card" *ngFor="let match of matches">
+                <mat-card *ngIf="(match.mentor | firedoc:'users' | async) as m;" class="mentor-card mat-elevation-z4">
+                    <img *ngIf="m.avatar else blankPic" [src]="m.id | avatar | async" class="card-cover"/>
+                    <ng-template #blankPic>
+                        <img src="/assets/blank_profile.jpg" class="card-cover"/>
+                    </ng-template>
+                    <mat-card class="mentor-info-card mat-elevation-z4">
+                        <h2>{{ m.name }}</h2>
+                        <h2> <a href="mailto:{{m.email}}" >{{ m.email }} </a> </h2>
+                        <span *ngIf="(match.mentor | firedoc:'mentors' | async) as mm;"> <h2> title: {{mm.title}} </h2>  </span>
+                        <a [routerLink]="['/chat', match.id]"> chat with {{ m.name }} </a>
+                    </mat-card>
+                </mat-card>
+                <br/>
+            </div>
+        </div>
+        <h4> <button  class="button-small" (click)="getMatches()"> refresh matches </button> </h4>
+    </mat-card>
+</div>

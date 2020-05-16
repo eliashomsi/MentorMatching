@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<div class="page">
+    <div class="intro">
+        <h1>Hello {{ (user$ | async)?.name }}!</h1>
+        <p>Mentor Profile</p>
+    </div>
+    
+    <mat-card class="mat-elevation-z3">
+        <h4> step 1  <span *ngIf="(mentor$ | async)?.id" style="color:green;"> &#10004; </span> </h4>
+        <form [formGroup]="mentorForm">
+
+            <mat-form-field floatLabel="always" class="full-width">
+                <mat-label>What is your current title?</mat-label>
+                <input
+                    id="title"
+                    name="title" 
+                    type="text"
+                    [value]="(mentor$ | async)?.title"
+                    matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field floatLabel="always" class="full-width">
+                <mat-label>How many mentees would you be willing to help per 2 weeks?</mat-label>
+                <input
+                    id="mentees"
+                    name="mentees" 
+                    type="number"
+                    [value]="(mentor$ | async)?.mentees"
+                    matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-chip-list #chipList aria-label="Company selection">
+                    <mat-chip *ngFor="let company of companies" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(company)">
+                    {{company}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Which companies have you worked for?"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </form>
+        <div class="form-actions">
+            <div class="flex-span"></div>
+            <button (click)="completeProfile()">Submit</button>
+            <button routerLink="/user">Go Back</button>
+        </div>
+    </mat-card>
+
+    <br/>
+    <br/>
+    <mat-card class="mat-elevation-z3">
+        <h4> Matched Metees: </h4>
+        <br/> 
+        <div>
+            <div class="match-card" *ngFor="let match of matches">
+                <mat-card *ngIf="(match.mentee | firedoc:'users' | async) as m;" class="mentee-card mat-elevation-z4">
+                    <img *ngIf="m.avatar else blankPic" [src]="m.id | avatar | async" class="card-cover"/>
+                    <ng-template #blankPic>
+                        <img src="/assets/blank_profile.jpg" class="card-cover"/>
+                    </ng-template>
+                    <mat-card class="mentee-info-card mat-elevation-z4">
+                        <h2>{{ m.name }}</h2>
+                        <h2> <a href="mailto:{{m.email}}" >{{ m.email }} </a> </h2>
+                        <span *ngIf="(match.mentee | firedoc:'mentees' | async) as mm;"> <h2> major: {{mm.major}} </h2> <h2 *ngIf="mm.resume"> resume: <a target="_blank" [href]="mm.id | resume| async" > resume.pdf </a> </h2> </span>
+                        <h2> <a [routerLink]="['/chat', match.id]"> chat with: {{ m.name }} </a> </h2>
+                    </mat-card>
+                </mat-card>
+                <br/>
+            </div>
+        </div>
+        <h4> <button  class="button-small" (click)="getMatches()"> refresh matches </button> </h4>
+    </mat-card>
+</div>

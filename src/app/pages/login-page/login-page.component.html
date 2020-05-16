@@ -1,0 +1,43 @@
+<div class="page-content">
+    <img (click)="this.router.navigate(['landing'])"  style="cursor:pointer" src="/assets/mentorme-logo.png" class="logo">
+    <br>
+    <mat-card class="mat-elevation-z3">
+        <form [formGroup]="loginForm">
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                    formControlName="email" 
+                    type="email"
+                    placeholder="someone@mcgill.ca"
+                    matInput
+                >
+            </mat-form-field>
+            
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input 
+                    formControlName="password" 
+                    type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                    matInput
+                >
+            </mat-form-field>
+            <div class="form-actions">
+                <mat-checkbox color="primary">Remember me</mat-checkbox>
+                <div class="flex-span"></div>
+                <app-button (action)="login()" [disabled]="loginForm.invalid" [loading]="loginLoading">Login</app-button>
+            </div>
+        </form>
+    </mat-card>
+
+
+    <div class="other-section">
+        <button type="button " (click)="tryGoogleLogin() " class="socialMedia">
+            start with <fa-icon class="white " [icon]="faGoogle"></fa-icon>
+        </button>
+        <br>
+        <span (click)="resetPassword()" style="cursor:pointer">Forgot Password?</span>
+        <hr>
+        <span  (click)="register()" style="cursor:pointer">Don't have an account?</span>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+h3 {
+    margin-top: 2em;
+    margin-left: 0.5em;
+    font-size: 1.3em;
+    display: inline-block;
+}
+
+li {
+    margin: 3em;
+    color: black;
+    font-size:1em;
+    display: inline-block;
+    list-style: none;
+}
+
+a {
+    cursor: pointer;
+    color:black;
+}
+
+.title-sec {
+    background-color: rgb(114, 146, 247);
+    width: 5%;
+    display: inline-block;
+    border-radius: 30%;
+    margin-left:2em;
+    padding: 0.8em;
+}
+
+.quick-profile {
+    border-radius: 30%;
+    width: 4em;
+    height: 4em;
+}

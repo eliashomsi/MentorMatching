@@ -1,0 +1,47 @@
+<div class="page-content">
+    <img (click)="this.router.navigate(['landing'])"  style="cursor:pointer" src="/assets/mentorme-logo.png" class="logo">
+    <mat-card class="mat-elevation-z3">
+        <form [formGroup]="registerForm">
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input
+                    formControlName="name" 
+                    type="text"
+                    placeholder="jack smith"
+                    matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                    formControlName="email" 
+                    type="email"
+                    placeholder="jack@mcgill.ca"
+                    matInput
+                >
+            </mat-form-field>
+            
+            <mat-form-field floatLabel="always" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input 
+                    formControlName="password" 
+                    type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                    matInput
+                >
+            </mat-form-field>
+        </form>
+        <div class="form-actions">
+            <div class="flex-span"></div>
+            <app-button (action)="register()" [disabled]="registerForm.invalid" [loading]="registerLoading">Register</app-button>
+        </div>
+    </mat-card>
+    <div class="other-section">
+        <button type="button " (click)="tryGoogleLogin() " class="socialMedia">
+            start with <fa-icon class="white" [icon]="faGoogle "></fa-icon>
+        </button>
+        <br>
+        <span (click)="this.router.navigate(['login'])" style="cursor:pointer">Already Have an account?</span>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Upload Picture</h4>
+        <button type="button" 
+                class="close pull-right" 
+                (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+        <mat-card class="mat-elevation-z3">
+            <div floatLabel="always" appearance="outline">
+                <mat-label>New Profile Picture</mat-label>
+                <input
+                    type="file"
+                    accept="image/png"
+                    (change)="uploadFile($event)"
+                >
+            </div>
+        </mat-card>
+    </div>
+</ng-template>
+
+<mat-toolbar>
+    <div class="clickable" routerLink="/user">
+    	<img src="/assets/mentorme-logo.png" class="icon-logo">
+    </div>
+    <div class="flex-span"></div>
+
+    <button (click)="signOut()" mat-button>Sign Out</button>
+
+    <div *ngIf="(user$ | async)?.avatar; else uploadPicture" class="profile-image" (click)="openModal(template)">
+        <img [src]="(user$ | async)?.id | avatar | async">
+    </div>
+
+    <ng-template #uploadPicture>
+        <div (click)="openModal(template)" class="profile-image">
+            <img src="/assets/blank_profile.jpg" />
+        </div>
+    </ng-template>
+</mat-toolbar>

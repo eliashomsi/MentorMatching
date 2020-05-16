@@ -1,0 +1,32 @@
+mat-toolbar {
+  height: 4.3em;
+  background-color: white;
+}
+
+.icon-logo {
+  margin-left: 8px;
+  width: 40%;
+}
+
+button {
+  font-size: 1em;
+  width: fit-content;
+  background-color: rgb(114, 146, 247);
+  color: white;
+  margin: 0.5em;
+  padding: 0.5em;
+  border-width: 0;
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 6%;
+  text-align: right;
+  margin: 1em;
+  
+  img {
+    border-radius: 50%;
+    width: 100%;
+    object-fit: contain;
+  }
+}

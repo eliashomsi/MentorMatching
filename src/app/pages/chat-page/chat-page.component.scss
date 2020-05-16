@@ -1,0 +1,156 @@
+.chat-page {
+    background: white;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+$break-large: 64em;
+.other-chats, .profile {
+    background: #eee;
+
+    @media screen and (max-width: $break-large) {
+        width: 0;
+    }
+
+    @media screen and (min-width: $break-large) {
+        width: 25vw;
+    }
+}
+
+.chat-content {
+    background-color:rgba(114, 146, 247, 0.2);
+    flex: 1 1 auto;
+    height: 49em;
+    display: flex;
+    flex-direction: column;
+    
+    .chat-history {
+        flex: 10;
+        padding: 16px;
+        overflow-y: auto;
+    }
+    
+    .chat-box {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        padding-top: 1px;
+
+        input {
+            width: 90%;
+            border: none;
+            padding-left: 25px;
+        }
+
+        button {
+            width: 11%;
+        }
+    }
+}
+
+.speech-divider {
+    padding: 5px 5px;
+}
+
+.speech-wrapper {
+  padding: 31px 21px;
+  .bubble {
+    width: 240px;
+    height: auto;
+    display: block;
+    background: rgb(114, 146, 247);
+    border-radius: 4px;
+    position: relative;
+    float: left;
+    &.alt {
+      float: right;
+      background: rgb(114, 146, 247);
+    }
+    .txt {
+      padding: 8px 55px 8px 14px;
+      .name {
+        font-size: 12px;
+        text-decoration: underline;
+        margin: 0 0 4px;
+        color: white;
+        span {
+          font-weight: normal;
+          color: rgb(114, 146, 247);;
+        }
+        &.alt {
+          color: #ffffff;
+        }
+      }
+      .message {
+        font-size: 12px;
+        margin: 0;
+        color: white;
+      }
+    }
+
+    .bubble-arrow {
+      position: absolute;
+      width: 0;
+      bottom: 42px;
+      left: -16px;
+      height: 0;
+      &.alt {
+        right: -2px;
+        bottom: 40px;
+        left: auto;
+      }
+    }
+
+    .bubble-arrow:after {
+      content: '';
+      position: absolute;
+      border: 0 solid transparent;
+      border-top: 9px solid rgb(114, 146, 247);
+      border-radius: 0 20px 0;
+      width: 15px;
+      height: 30px;
+      transform: rotate(145deg);
+    }
+
+    .bubble-arrow.alt:after {
+      transform: rotate(45deg) scaleY(-1);
+      border-top: 9px solid rgb(114, 146, 247);;
+    }
+  }
+}
+
+.profile {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    color: black;
+}
+
+.profile-section-title {
+    opacity: 0.9;
+    margin-bottom: -13px;
+    font-size: 10px;
+}
+
+.profile-section {
+    margin-bottom: -4px;
+    font-size: 16px;
+}
+
+.profile-image {
+  height: 100%;
+}
+
+.profile-image-cropper {
+    width: 5em;
+    height: 5em;
+
+    img {
+      border-radius: 50%;
+      width: 100%;
+    }
+}

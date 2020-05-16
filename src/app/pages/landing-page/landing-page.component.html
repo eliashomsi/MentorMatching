@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <span class="clickable" routerLink="/landing">
+    	<img src="/assets/mentorme-logo.png" class="icon-logo">
+    </span>
+    <div class="flex-span"></div>
+    <button routerLink="/register" mat-button>Sign Up</button>
+    <button routerLink="/login" mat-button>Sign In</button>
+</mat-toolbar>
+
+<div class="bg"> 
+	<div class="content" >
+		<header class="tagline">
+			Mentor Me!
+		</header>
+		<br>
+		<p class="description">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially.
+		</p>
+		<br>
+		<button (click)="action.emit()" mat-flat-button [color]="color" [disabled]="disabled || loading">
+		<span [class.hide]="loading"><ng-content></ng-content></span>
+		<button routerLink="/register" mat-flat-button class="button-settings">Join MentorMe</button>
+		</button>
+	</div>
+</div>

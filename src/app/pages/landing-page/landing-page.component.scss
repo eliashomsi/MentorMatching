@@ -1,0 +1,67 @@
+mat-toolbar {
+  background: rgba(0, 0, 0, 0) !important;
+  color: black !important;
+  height: 100px;
+}
+
+.icon-logo {
+  margin-top: 8px;
+  margin-left: 8px;
+  width: 40%;
+}
+
+.hide {
+  opacity: 0;
+}
+
+mat-spinner {
+  position: absolute;
+  top: 6px;
+  margin-left: 4px;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  align-items: left;
+  padding-left: 3em;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.tagline {
+  font-size: 75px;
+  margin-top: 100px;
+  font-family: Roboto, "Helvetica-Bold", sans-serif;
+  color: black;
+  text-align: left;
+  transform: rotate(0deg);
+}
+
+.description {
+  top: 430px;
+  width: 700px;
+  margin-bottom: 15px;
+  font-family: Roboto, "Helvetica", sans-serif;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+button {
+  font-size: 1em;
+  width: fit-content;
+  background-color: rgb(114, 146, 247);
+  color: white;
+  border-width: 0;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.bg {
+  background-image: url("/assets/background.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+}
